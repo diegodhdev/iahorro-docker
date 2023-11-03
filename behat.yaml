@@ -1,0 +1,20 @@
+default:
+  extensions:
+    Soulcodex\Behat:
+      kernel: # Default values
+        bootstrap_path: '/bootstrap/app.php'
+        environment_path: '.env.behat'
+    Behat\MinkExtension: # Default mink extension configuration
+      default_session: laravel
+      laravel: ~
+
+  # Your test suites here
+  suites:
+    lead_create:
+      paths: [ 'app/Http/Controllers/Tests/Features/Leads/create.feature' ]
+      contexts:
+        - App\Http\Controllers\Tests\Features\GenericContext:
+    lead_store:
+      paths: [ 'app/Http/Controllers/Tests/Features/Leads/store.feature' ]
+      contexts:
+        - App\Http\Controllers\Tests\Features\GenericContext:

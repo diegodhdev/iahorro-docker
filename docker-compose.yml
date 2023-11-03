@@ -1,0 +1,51 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: your_user
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: iahorro
+    container_name: iahorro-app-php
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - iahorro
+
+  db:
+    image: mysql:8.0.0
+    container_name: iahorro-db-mysql
+    restart: unless-stopped
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_DATABASE: iahorro
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_PASSWORD: your_user_password
+      MYSQL_USER: your_user
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - iahorro
+
+  nginx:
+    image: nginx:alpine
+    container_name: iahorro-nginx-server
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d
+    networks:
+      - iahorro
+
+networks:
+  iahorro:
+    driver: bridge
