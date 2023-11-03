@@ -95,6 +95,11 @@ Accede al container `docker exec -it iahorro-app-php bash` y ejecuta: el comando
 - `php artisan key:generate`
 - `php artisan migrate`
 
+Puede ser necesario crear las siguientes carpetas al inicializar el proyecto:
+- `mkdir storage/framework/cache`
+- `mkdir storage/framework/sessions`
+- `mkdir storage/framework/views`
+
 Dentro del php container podemos tirar los siguientes comandos:
 - phpunit: `vendor/bin/phpunit` // Unit testing
 - behat: `vendor/bin/behat` // End to end testing
