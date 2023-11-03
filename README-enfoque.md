@@ -90,8 +90,10 @@ En los ficheros .env y .env.behat ajusta la variable de entorno para usuario de 
 - `docker exec -it iahorro-db-mysql bash`
 - `docker exec -it iahorro-nginx-server bash`
 
-Accede al container `docker exec -it iahorro-app-php bash` y ejecuta el comando para migrar la base de datos:
-`php artisan migrate`
+Accede al container `docker exec -it iahorro-app-php bash` y ejecuta: el comando para migrar la base de datos:
+- `composer install`
+- `php artisan key:generate`
+- `php artisan migrate`
 
 Dentro del php container podemos tirar los siguientes comandos:
 - phpunit: `vendor/bin/phpunit` // Unit testing
