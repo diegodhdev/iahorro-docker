@@ -27,7 +27,6 @@ RUN pecl install xdebug \
 && echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
 && echo "xdebug.mode=coverage" >> /usr/local/etc/php/conf.d/xdebug.ini
 
-
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -41,6 +40,8 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY /composer.json /var/www/
+COPY /composer.lock /var/www/
 
 # Create system user to run Composer and Artisan Commands
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
@@ -49,5 +50,5 @@ RUN mkdir -p /home/$user/.composer && \
 
 # Set working directory
 WORKDIR /var/www
-
+RUN composer install --ignore-platform-reqs
 USER $user

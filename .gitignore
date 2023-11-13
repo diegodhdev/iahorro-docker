@@ -16,3 +16,5 @@
 /phpunit.xml.bak
 /build
 /infection
+.php-cs-fixer.cache
+.env

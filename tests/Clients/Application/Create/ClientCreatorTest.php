@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Leads\Application\Destroy;
+namespace Tests\Clients\Application\Create;
 
 use Backend\Clients\Application\ClientCreator;
 use Backend\Clients\Domain\EmailDuplicatedException;
